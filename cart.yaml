@@ -1,0 +1,56 @@
+openapi: '3.0.0'
+info:
+  version: '1.0.0'
+  title: 'Arch Lab API'
+  description: Домашнее задание по курсу Архитектура программных систем
+servers:
+  - url: http://localhost:8082
+    description: Cart server
+paths:
+  /cart:
+    post:
+      summary: Добавление товара в корзину
+      parameters:
+      - name: id_item
+        description: Идентификатор товара
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: login
+        description: Логин пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Товар успешно добавлен в корзину
+        404:
+          description: Корзина не найдена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Непредвиденная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: Сообщение о ошибке
+          type: string
+  securitySchemes:
+      basicAuth:     
+        type: http
+        scheme: basic
+security:
+  - basicAuth: []
