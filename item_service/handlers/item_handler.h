@@ -44,6 +44,8 @@ using Poco::Util::OptionSet;
 using Poco::Util::ServerApplication;
 
 #include "../../database/item.h"
+#include "../../helper.h"
+
 
 static bool hasSubstr(const std::string &str, const std::string &substr)
 {

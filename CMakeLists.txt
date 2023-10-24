@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 
 project(hl_server C CXX)
 
-SET (EXAMPLE_BINARY "ProjectManagement")
+SET (EXAMPLE_BINARY "hl_mai_lab_02")
 SET (CART_SERVICE "cart_service")
 SET (ITEM_SERVICE "item_service")
 

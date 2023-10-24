@@ -75,6 +75,27 @@ services:
     volumes:
       - db-node-ex03-data:/var/lib/mysql
 
+  all-db:
+    build:
+      context: proxysql
+    healthcheck:
+      test: "/usr/bin/mysql -h 127.0.0.1 -P 6033 --user=stud --password=stud --execute \"SHOW DATABASES;\""
+      timeout: 20s
+      retries: 5
+    networks:
+      - arch-network
+    ports:
+      # Mysql Client Port
+      - 6033:6033
+      # Mysql Admin Port
+      - 6032:6032
+    depends_on:
+      - mai-db-node-ex01
+      - mai-db-node-ex02
+      - mai-db-node-ex03
+    volumes:
+      - proxysql-data:/var/lib/proxysql
+
   user_service:
     build:
       context: user_service
@@ -136,6 +157,7 @@ volumes:
   db-node-ex01-data:
   db-node-ex02-data:
   db-node-ex03-data:
+  proxysql-data:
 
 networks:
   arch-network:
